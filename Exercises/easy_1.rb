@@ -78,10 +78,74 @@
 #   puts rot13(encrypted_name)
 # end
 
-any?([1, 3, 5, 6]) { |value| value.even? } == true
-any?([1, 3, 5, 7]) { |value| value.even? } == false
-any?([2, 4, 6, 8]) { |value| value.odd? } == false
-any?([1, 3, 5, 7]) { |value| value % 5 == 0 } == true
-any?([1, 3, 5, 7]) { |value| true } == true
-any?([1, 3, 5, 7]) { |value| false } == false
-any?([]) { |value| true } == false
+# def any?(arr)
+#   if block_given?
+#     arr.each do |num|
+#       return true if yield(num)
+#     end
+#   end
+
+#   false
+# end
+
+# p any?([1, 3, 5, 6]) { |value| value.even? } == true
+# p any?([1, 3, 5, 7]) { |value| value.even? } == false
+# p any?([2, 4, 6, 8]) { |value| value.odd? } == false
+# p any?([1, 3, 5, 7]) { |value| value % 5 == 0 } == true
+# p any?([1, 3, 5, 7]) { |value| true } == true
+# p any?([1, 3, 5, 7]) { |value| false } == false
+# p any?([]) { |value| true } == false
+
+# def all?(arr)
+#   arr.each{ |item| return false if yield(item) == false }
+#   true
+# end
+
+# p all?([1, 3, 5, 6]) { |value| value.odd? } == false
+# p all?([1, 3, 5, 7]) { |value| value.odd? } == true
+# p all?([2, 4, 6, 8]) { |value| value.even? } == true
+# p all?([1, 3, 5, 7]) { |value| value % 5 == 0 } == false
+# p all?([1, 3, 5, 7]) { |value| true } == true
+# p all?([1, 3, 5, 7]) { |value| false } == false
+# p all?([]) { |value| false } == true
+
+# def none?(arr)
+#   arr.each{ |item| return false if yield(item)}
+#   true
+# end
+
+# p none?([1, 3, 5, 6]) { |value| value.even? } == false
+# p none?([1, 3, 5, 7]) { |value| value.even? } == true
+# p none?([2, 4, 6, 8]) { |value| value.odd? } == true
+# p none?([1, 3, 5, 7]) { |value| value % 5 == 0 } == false
+# p none?([1, 3, 5, 7]) { |value| true } == false
+# p none?([1, 3, 5, 7]) { |value| false } == true
+# p none?([]) { |value| true } == true
+
+# def one?(arr)
+#   count = 0
+#   arr.each{ |item| count += 1  if yield(item) }
+#   return true if count == 1
+#   false
+# end
+
+# p one?([1, 3, 5, 6]) { |value| value.even? }    # -> true
+# p one?([1, 3, 5, 7]) { |value| value.odd? }     # -> false
+# p one?([2, 4, 6, 8]) { |value| value.even? }    # -> false
+# p one?([1, 3, 5, 7]) { |value| value % 5 == 0 } # -> true
+# p one?([1, 3, 5, 7]) { |value| true }           # -> false
+# p one?([1, 3, 5, 7]) { |value| false }          # -> false
+# p one?([]) { |value| true }                     # -> false
+
+def count(arr)
+  count = 0
+  arr.each{ |item| count += 1 if yield(item) }
+  return count 
+end
+
+p count([1,2,3,4,5]) { |value| value.odd? } == 3
+p count([1,2,3,4,5]) { |value| value % 3 == 1 } == 2
+p count([1,2,3,4,5]) { |value| true } == 5
+p count([1,2,3,4,5]) { |value| false } == 0
+p count([]) { |value| value.even? } == 0
+p count(%w(Four score and seven)) { |value| value.size == 5 } == 2
