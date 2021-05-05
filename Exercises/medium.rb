@@ -43,3 +43,35 @@ def gather(items)
   # puts "#{items.join(', ')}"
   puts "Nice selection of food we have gathered!"
 end
+
+# gather(items){ |food| puts food }
+
+# gather(items) do | *veg, grain|
+#   puts veg.join(', ')
+#   puts grain
+# end
+
+gather(items) do | apple, *veg, grain|
+  puts apple
+  puts veg.join(', ')
+  puts grain
+end
+
+gather(items) do | fruit, *food|
+  puts fruit
+  puts food.join(', ')
+end
+
+gather(items) do | apples, corn, cabbage, wheat |
+  puts "#{apples}, #{corn}, #{cabbage}, and #{wheat}"
+end
+
+# birds = ['crow', 'finch', 'hawk', 'eagle']
+
+# def types(birds)
+#   yield birds
+# end
+
+# types(birds) do |_, _, *raptors|
+#   puts "Raptors: #{raptors.join(', ')}."
+# end
