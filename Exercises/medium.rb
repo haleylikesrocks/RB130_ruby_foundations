@@ -21,24 +21,24 @@
 # listener.listen
 # listener.play # Outputs "Hello World!"
 
-class TextAnalyzer
-  def process(file_name)
-    file_data = File.read(file_name)
-    counter = yield(file_data)
-    puts counter.join(" ")
-  end
-end
+# class TextAnalyzer
+#   def process(file_name)
+#     file_data = File.read(file_name)
+#     counter = yield(file_data)
+#     puts counter.join(" ")
+#   end
+# end
 
-analyzer = TextAnalyzer.new
-analyzer.process("sample_test.txt") do |text| 
-  [text.split(/\n\n/).size, "paragraph"]
-end
-analyzer.process ("sample_test.txt") do |text| 
-  [text.split(/\n/).size, "paragraph"]
-end
-analyzer.process ("sample_test.txt") do |text| 
-  [text.split(" ").size, "words"]
-end
+# analyzer = TextAnalyzer.new
+# analyzer.process("sample_test.txt") do |text| 
+#   [text.split(/\n\n/).size, "paragraph"]
+# end
+# analyzer.process ("sample_test.txt") do |text| 
+#   [text.split(/\n/).size, "paragraph"]
+# end
+# analyzer.process ("sample_test.txt") do |text| 
+#   [text.split(" ").size, "words"]
+# end
 
 
 # items = ['apples', 'corn', 'cabbage', 'wheat']
@@ -82,13 +82,13 @@ end
 #   puts "Raptors: #{raptors.join(', ')}."
 # end
 
-# def convert_to_base_8(n)
-#   n.method_name.method_name # replace these two method calls
-# end
+def convert_to_base_8(n)
+  n.to_s(8).to_i # replace these two method calls
+end
 
-# # The correct type of argument must be used below
-# base8_proc = method(argument).to_proc
+# The correct type of argument must be used below
+base8_proc = method(:convert_to_base_8).to_proc
 
-# # We'll need a Proc object to make this code work. Replace `a_proc`
-# # with the correct object
-# [8, 10, 12, 14, 16, 33].map(&a_proc)
+# We'll need a Proc object to make this code work. Replace `a_proc`
+# with the correct object
+[8, 10, 12, 14, 16, 33].map(&base8_proc)
